@@ -53,9 +53,12 @@ export function createReducer(state = initialState, action) {
     case DELETE_MATCH:
       return {
         ...state,
-        matches: state?.matches?.filter(
-          (match) => match?.id !== action?.payload?.id
-        ),
+        matches:
+          state?.matches?.length === 1
+            ? [...initialState.matches]
+            : state?.matches?.filter(
+                (match) => match?.id !== action?.payload?.id
+              ),
       };
 
     case INCREMENT_SCORE:
